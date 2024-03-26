@@ -5,16 +5,12 @@ import 'package:pokedex_app/features/pokemons/domain/entities/pokemon.dart';
 
 part 'pokemon_model.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true, fieldRename: FieldRename.snake)
 class PokemonModel extends Pokemon {
-  factory PokemonModel.fromJson(Map<String, dynamic> json) =>
-      _$PokemonModelFromJson(json);
-
-  @override
-  final int id;
   @override
   final String name;
-  const PokemonModel({required this.id, required this.name}) : super(id, name);
-
+  const PokemonModel({required this.name}) : super(name);
+  factory PokemonModel.fromJson(Map<String, dynamic> json) =>
+      _$PokemonModelFromJson(json);
   Map<String, dynamic> toJson() => _$PokemonModelToJson(this);
 }

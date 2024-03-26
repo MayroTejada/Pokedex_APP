@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_app/di_container.dart';
 import 'package:pokedex_app/features/home/presentation/views/home_page.dart';
 import 'package:pokedex_app/themes/poke_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
