@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pokedex_app/di_container.dart';
+import 'package:pokedex_app/features/pokemons/presentation/components/poke_item_card.dart';
 import 'package:pokedex_app/features/pokemons/presentation/providers/pokemon_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,31 +24,38 @@ class _HomePageState extends State<HomePage> {
     return Observer(
       builder: (_) {
         return Scaffold(
+          
           appBar: AppBar(),
-          body: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          pokemonProvider.fetchPokemons('');
+          body: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (_, index) {
+                          return PokeItemCard(
+                              pokemon: pokemonProvider.pokemonList[index]);
                         },
-                        child: const Text('llamar pokemons')),
-                  ],
-                ),
-                SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (_, index) {
-                        return Text(pokemonProvider.pokemonList[index].name);
-                      },
-                      itemCount: pokemonProvider.pokemonList.length),
-                )
-              ]),
+                        itemCount: pokemonProvider.pokemonList.length),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            pokemonProvider.fetchPokemons('');
+                          },
+                          child: const Text('llamar pokemons')),
+                    ],
+                  ),
+                ]),
+          ),
         );
       },
     );

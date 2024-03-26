@@ -9,7 +9,11 @@ part 'pokemon_model.g.dart';
 class PokemonModel extends Pokemon {
   @override
   final String name;
-  const PokemonModel({required this.name}) : super(name);
+  @override
+  final int id;
+
+  const PokemonModel({required this.name, required this.id})
+      : super(name: name, id: id);
   factory PokemonModel.fromJson(Map<String, dynamic> json) =>
       _$PokemonModelFromJson(json);
   Map<String, dynamic> toJson() => _$PokemonModelToJson(this);
