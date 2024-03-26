@@ -24,8 +24,16 @@ class _HomePageState extends State<HomePage> {
     return Observer(
       builder: (_) {
         return Scaffold(
-          
-          appBar: AppBar(),
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {},
+            ),
+            title: Text(
+              'PokeDex',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
           body: SingleChildScrollView(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

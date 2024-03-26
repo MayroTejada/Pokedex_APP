@@ -8,6 +8,8 @@ final ThemeData pokedexTheme = ThemeData(
   appBarTheme: AppBarTheme(
     backgroundColor: pokeRed,
     systemOverlayStyle: SystemUiOverlayStyle.light,
+    toolbarTextStyle: const TextStyle(color: Colors.white),
+    actionsIconTheme: const IconThemeData(color: Colors.white),
     titleTextStyle: const TextStyle(
         color: Colors.white, fontFamily: 'Pokemon', fontSize: 10),
   ), // Gris claro

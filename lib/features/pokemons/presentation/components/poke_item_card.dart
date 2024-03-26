@@ -16,6 +16,8 @@ class PokeItemCard extends StatelessWidget {
         child: SizedBox(
             height: 60,
             child: ListTile(
+              trailing: Text(pokemon.id.toString()),
+              leading: const Icon(Icons.catching_pokemon),
               title: Text(pokemon.name),
             )),
       ),

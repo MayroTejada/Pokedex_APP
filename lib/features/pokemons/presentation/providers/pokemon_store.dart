@@ -1,7 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pokedex_app/di_container.dart';
-import 'package:pokedex_app/features/pokemons/data/models/pokemon_model.dart';
 import 'package:pokedex_app/features/pokemons/domain/entities/pokemon.dart';
 import 'package:pokedex_app/features/pokemons/domain/usecases/get_pokemons.dart';
 
