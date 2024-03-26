@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pokedex_app/core/network/failure.dart';
 import 'package:pokedex_app/features/pokemons/data/datasources/pokemon_remote_datasource.dart';
@@ -13,9 +14,10 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   PokemonRepositoryImpl({required this.remoteDataSource});
   @override
-  Future<Either<Failure, List<Pokemon>>> getPokemons() async {
+  Future<Either<Failure, List<Pokemon>>> getPokemons(
+      QueryOptions queries) async {
     try {
-      var res = await remoteDataSource.getPokemons();
+      var res = await remoteDataSource.getPokemons(queries);
       if (res.data != null) {}
       return Right(PokemonListResponseModel.fromJson(res.data!).pokemonSpecies);
     } on DioException catch (ex) {

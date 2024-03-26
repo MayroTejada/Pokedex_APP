@@ -15,10 +15,12 @@ class PokeItemCard extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20))),
         child: SizedBox(
             height: 60,
-            child: ListTile(
-              trailing: Text(pokemon.id.toString()),
-              leading: const Icon(Icons.catching_pokemon),
-              title: Text(pokemon.name),
+            child: Center(
+              child: ListTile(
+                trailing: Text(pokemon.id.toString()),
+                leading: const Icon(Icons.catching_pokemon),
+                title: Text(pokemon.name),
+              ),
             )),
       ),
     );
