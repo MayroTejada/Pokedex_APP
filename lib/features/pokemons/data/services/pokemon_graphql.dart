@@ -1,13 +1,9 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable()
 class PokemonGraphQlService {
-  static final HttpLink _httpLink =
-      HttpLink('https://beta.pokeapi.co/graphql/v1beta');
-
-  static GraphQLClient client = GraphQLClient(
-    link: _httpLink,
-    cache: GraphQLCache(),
-  );
+  final GraphQLClient client;
 
   static String getPokemonsQuery = """
    query SamplePokeAPIQuery {
@@ -36,4 +32,6 @@ class PokemonGraphQlService {
 }
 
   """;
+
+  PokemonGraphQlService({required this.client});
 }

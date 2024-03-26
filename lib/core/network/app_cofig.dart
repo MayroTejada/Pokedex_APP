@@ -9,7 +9,7 @@ abstract class IConfig {
 @Injectable(as: IConfig)
 class AppConfig extends IConfig {
   @override
-  String get baseUrl => "https://pokeapi.co/api/v2";
+  String get baseUrl => "https://beta.pokeapi.co/graphql/v1beta";
 
   @override
   Map<String, String> get headers => {};
