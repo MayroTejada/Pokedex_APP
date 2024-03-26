@@ -11,20 +11,27 @@ part 'pokemon_store.g.dart';
 @Injectable()
 class PokemonStore = _PokemonStoreBase with _$PokemonStore;
 
+enum PokemonStoreStateEnum { none, loadedList, failed, loading }
+
 abstract class _PokemonStoreBase with Store {
   @observable
   ObservableList<Pokemon> pokemonList = ObservableList();
   @observable
   Observable<String> filters =
       Observable(PokemonGraphQlService.getPokemonsQuery);
+  @observable
+  Observable<PokemonStoreStateEnum> state =
+      Observable(PokemonStoreStateEnum.none);
   @action
   Future<void> fetchPokemons(String params) async {
+    state.value = PokemonStoreStateEnum.loading;
     final result = await getIt<GetPokemons>().call(GetPokemonsParams(
         queries: graphQL.QueryOptions(document: graphQL.gql(filters.value))));
     result.fold((l) {
       print('error');
-    }, (r) {
-      pokemonList.addAll(r);
+    }, (list) {
+      state.value = PokemonStoreStateEnum.loadedList;
+      pokemonList.addAll(list);
     });
   }
 }
