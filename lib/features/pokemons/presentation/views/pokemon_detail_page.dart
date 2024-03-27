@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:pokedex_app/di_container.dart';
 import 'package:pokedex_app/features/pokemons/presentation/providers/pokemon_store.dart';
 
@@ -40,12 +41,26 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                   stretch: true,
                   pinned: true,
                   stretchTriggerOffset: 100,
+                  flexibleSpace: FlexibleSpaceBar(
+                      background: Center(
+                          child: SvgPicture.network(
+                        pokemonDetail!.sprites?.other.dreamWorld.frontDefault ??
+                            '',
+                        width: 150,
+                        height: 150,
+                        semanticsLabel: 'A shark?!',
+                        placeholderBuilder: (BuildContext context) => Container(
+                            padding: const EdgeInsets.all(30.0),
+                            child: const CircularProgressIndicator()),
+                      )),
+                      collapseMode: CollapseMode.pin,
+                      expandedTitleScale: 1.3,
+                      title: Text(pokemonDetail.pokemon?.name ?? '')),
                 ),
                 SliverFillRemaining(
                   child: Stack(children: [
-                    
                     Column(
-                      children: [Text(pokemonDetail!.pokemon?.name ?? '')],
+                      children: [Text(pokemonDetail.pokemon?.name ?? '')],
                     ),
                   ]),
                 )
