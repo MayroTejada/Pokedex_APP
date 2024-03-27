@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_app/di_container.dart';
-import 'package:pokedex_app/features/pokemons/presentation/views/pokedex_page.dart';
+import 'package:pokedex_app/router.dart';
 import 'package:pokedex_app/themes/poke_theme.dart';
 
 void main() {
@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: Routes.router,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: pokedexTheme,
-      home: const PokedexPage(),
     );
   }
 }
