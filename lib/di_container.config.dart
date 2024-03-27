@@ -14,8 +14,8 @@ import 'package:graphql_flutter/graphql_flutter.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'core/network/app_cofig.dart' as _i3;
-import 'core/network/dio_provider.dart' as _i13;
-import 'core/network/graph_provider.dart' as _i14;
+import 'core/network/dio_provider.dart' as _i14;
+import 'core/network/graph_provider.dart' as _i15;
 import 'features/pokemons/data/datasources/pokemon_remote_datasource.dart'
     as _i8;
 import 'features/pokemons/data/repositories/pokemon_repository_impl.dart'
@@ -23,7 +23,8 @@ import 'features/pokemons/data/repositories/pokemon_repository_impl.dart'
 import 'features/pokemons/data/services/pokemon_graphql.dart' as _i7;
 import 'features/pokemons/data/services/pokemon_service.dart' as _i11;
 import 'features/pokemons/domain/repositories/pokemon_repository.dart' as _i9;
-import 'features/pokemons/domain/usecases/get_pokemons.dart' as _i12;
+import 'features/pokemons/domain/usecases/get_pokemon.dart' as _i12;
+import 'features/pokemons/domain/usecases/get_pokemons.dart' as _i13;
 import 'features/pokemons/presentation/providers/pokemon_store.dart' as _i4;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -58,12 +59,14 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i5.Dio>(),
           baseUrl: gh<String>(),
         ));
-    gh.singleton<_i12.GetPokemons>(
-        () => _i12.GetPokemons(repository: gh<_i9.PokemonRepository>()));
+    gh.singleton<_i12.GetPokemon>(
+        () => _i12.GetPokemon(repository: gh<_i9.PokemonRepository>()));
+    gh.singleton<_i13.GetPokemons>(
+        () => _i13.GetPokemons(repository: gh<_i9.PokemonRepository>()));
     return this;
   }
 }
 
-class _$DioProvider extends _i13.DioProvider {}
+class _$DioProvider extends _i14.DioProvider {}
 
-class _$GraphProvider extends _i14.GraphProvider {}
+class _$GraphProvider extends _i15.GraphProvider {}

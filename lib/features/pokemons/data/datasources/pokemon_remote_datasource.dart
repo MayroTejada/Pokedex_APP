@@ -7,6 +7,7 @@ import 'package:pokedex_app/features/pokemons/data/services/pokemon_service.dart
 
 abstract class PokemonRemoteDataSource {
   Future<QueryResult> getPokemons(QueryOptions queryOptions);
+  Future<QueryResult> getPokemon(QueryOptions queryOptions);
 }
 
 @Injectable(as: PokemonRemoteDataSource)
@@ -22,7 +23,10 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
   @override
   Future<QueryResult> getPokemons(QueryOptions queryOptions) async {
     return service2.client.query(queryOptions);
-    // return service2.client.query<PokemonListResponseModel>(
-    //     QueryOptions(document: gql(PokemonGraphQlService.getPokemonsQuery)));
+  }
+
+  @override
+  Future<QueryResult> getPokemon(QueryOptions<Object?> queryOptions) {
+    return service2.client.query(queryOptions);
   }
 }

@@ -3,8 +3,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pokedex_app/core/network/failure.dart';
 import 'package:pokedex_app/features/pokemons/data/datasources/pokemon_remote_datasource.dart';
+import 'package:pokedex_app/features/pokemons/data/models/pokemon_detail_model.dart';
 import 'package:pokedex_app/features/pokemons/data/models/pokemon_list_response_model.dart';
 import 'package:pokedex_app/features/pokemons/domain/entities/pokemon.dart';
+import 'package:pokedex_app/features/pokemons/domain/entities/pokemon_detail.dart';
 import 'package:pokedex_app/features/pokemons/domain/repositories/pokemon_repository.dart';
 
 @Injectable(as: PokemonRepository)
@@ -23,7 +25,23 @@ class PokemonRepositoryImpl implements PokemonRepository {
       } else {
         return const Left(ServerFailure(code: 200, message: 'empty list'));
       }
-    } on GraphQLError catch (ex) {
+    } on Exception catch (ex) {
+      return Left(ServerFailure(code: 400, message: ex.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PokemonDetail>> getPokemon(
+      QueryOptions<Object?> queries) async {
+    try {
+      var res = await remoteDataSource.getPokemon(queries);
+      if (res.data != null) {
+        return Right(
+            PokemonDetailModel.fromJson(res.data!['pokemon_response'][0]!));
+      } else {
+        return const Left(ServerFailure(code: 200, message: 'empty list'));
+      }
+    } on Exception catch (ex) {
       return Left(ServerFailure(code: 400, message: ex.toString()));
     }
   }

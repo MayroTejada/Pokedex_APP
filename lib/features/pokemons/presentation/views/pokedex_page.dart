@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pokedex_app/core/constants.dart';
 import 'package:pokedex_app/di_container.dart';
 import 'package:pokedex_app/features/pokemons/presentation/components/poke_item_card.dart';
 import 'package:pokedex_app/features/pokemons/presentation/providers/pokemon_store.dart';
@@ -78,8 +80,14 @@ class _PokedexPageState extends State<PokedexPage> {
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (_, index) {
+                            var pokemon = pokemonProvider.pokemonList[index];
                             return PokeItemCard(
-                                pokemon: pokemonProvider.pokemonList[index]);
+                              pokemon: pokemon,
+                              onCallBack: () {
+                                context.push(pokemonDetailPageRoute,
+                                    extra: {'pokemon_id': pokemon.id});
+                              },
+                            );
                           },
                           itemCount: pokemonProvider.pokemonList.length),
                     )
