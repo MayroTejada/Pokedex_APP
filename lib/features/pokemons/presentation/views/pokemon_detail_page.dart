@@ -14,8 +14,11 @@ class PokemonDetailPage extends StatefulWidget {
 
 class _PokemonDetailPageState extends State<PokemonDetailPage> {
   late PokemonStore pokemonStore;
+  late Tween<double> tween;
   @override
   void initState() {
+    tween = Tween<double>(begin: 0, end: 1);
+
     pokemonStore = getIt<PokemonStore>()..fetchPokemon(widget.pokemonId);
     super.initState();
   }
@@ -54,8 +57,11 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                             child: const CircularProgressIndicator()),
                       )),
                       collapseMode: CollapseMode.pin,
-                      expandedTitleScale: 1.3,
-                      title: Text(pokemonDetail.pokemon?.name ?? '')),
+                      expandedTitleScale: 1.1,
+                      title: AnimatedOpacity(
+                          duration: const Duration(seconds: 1),
+                          opacity: 1,
+                          child: Text(pokemonDetail.pokemon?.name ?? ''))),
                 ),
                 SliverFillRemaining(
                   child: Stack(children: [

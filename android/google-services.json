@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924930531938",
+    "project_id": "pokedexapp-4aec3",
+    "storage_bucket": "pokedexapp-4aec3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924930531938:android:dc79aa4d58a26c7dbe273b",
+        "android_client_info": {
+          "package_name": "com.mario.pokedex_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB79-ILiNAt60UXQ4wOABQHjdmIVy3MslQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
