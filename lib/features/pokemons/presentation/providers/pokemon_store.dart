@@ -64,9 +64,7 @@ query GetPokemonIQuery {
   }
 }
           """))));
-    result.fold((l) {
-      print('error');
-    }, (pokemon) {
+    result.fold((l) {}, (pokemon) {
       state.value = PokemonStoreStateEnum.loadedList;
       currentPokemon.value = pokemon;
     });
