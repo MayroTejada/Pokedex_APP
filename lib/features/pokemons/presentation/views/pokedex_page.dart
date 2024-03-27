@@ -4,14 +4,14 @@ import 'package:pokedex_app/di_container.dart';
 import 'package:pokedex_app/features/pokemons/presentation/components/poke_item_card.dart';
 import 'package:pokedex_app/features/pokemons/presentation/providers/pokemon_store.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class PokedexPage extends StatefulWidget {
+  const PokedexPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<PokedexPage> createState() => _PokedexPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _PokedexPageState extends State<PokedexPage> {
   late PokemonStore pokemonProvider;
   final GlobalKey<ScaffoldState> scaffoldState =
       GlobalKey<ScaffoldState>(debugLabel: 'scaffold');
@@ -28,21 +28,41 @@ class _HomePageState extends State<HomePage> {
         return SafeArea(
           child: Scaffold(
             key: scaffoldState,
-            drawer: const Drawer(
-              child: Column(
-                children: [Text('ALGO')],
+            drawer: Drawer(
+              child: ListView(
+                children: [
+                  const DrawerHeader(
+                    margin: EdgeInsets.all(10),
+                    child: Text('Filtros'),
+                  ),
+                  ListTile(
+                    title: const Text('Region de kanto'),
+                    trailing: Checkbox(
+                        value: pokemonProvider.isKantoRegion.value,
+                        onChanged: (_) => pokemonProvider.setFilterRegion(_)),
+                  ),
+                  ListTile(
+                    title: const Text('Region de johto'),
+                    trailing: Checkbox(
+                        value: pokemonProvider.isKantoRegion.value,
+                        onChanged: (_) => pokemonProvider.setFilterRegion(_)),
+                  )
+                ],
               ),
             ),
             appBar: AppBar(
               leading: IconButton(
-                icon: const Icon(Icons.menu),
+                icon: const Icon(
+                  Icons.filter_list,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   scaffoldState.currentState!.openDrawer();
                 },
               ),
               title: Text(
                 'PokeDex',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).appBarTheme.titleTextStyle,
               ),
             ),
             body: ConstrainedBox(

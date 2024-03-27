@@ -17,16 +17,24 @@ abstract class _PokemonStoreBase with Store {
   @observable
   ObservableList<Pokemon> pokemonList = ObservableList();
   @observable
+  Observable<bool> isKantoRegion = Observable(false);
+  @observable
   Observable<String> filters =
       Observable(PokemonGraphQlService.getPokemonsQuery);
   @observable
   Observable<PokemonStoreStateEnum> state =
       Observable(PokemonStoreStateEnum.none);
   @action
+  void setFilterRegion(bool? value) {
+    isKantoRegion.value = value ?? false;
+  }
+
+  @action
   Future<void> fetchPokemons(String params) async {
     state.value = PokemonStoreStateEnum.loading;
-    final result = await getIt<GetPokemons>().call(GetPokemonsParams(
-        queries: graphQL.QueryOptions(document: graphQL.gql(filters.value))));
+
+    final result = await getIt<GetPokemons>()
+        .call(GetPokemonsParams(queries: queryOptions));
     result.fold((l) {
       print('error');
     }, (list) {
@@ -34,4 +42,17 @@ abstract class _PokemonStoreBase with Store {
       pokemonList.addAll(list);
     });
   }
+
+  graphQL.QueryOptions setQueries() {
+    int generationId = 2;
+    if (isKantoRegion.value) {
+      generationId = 1;
+    }
+    return graphQL.QueryOptions(
+      document: graphQL.gql(PokemonGraphQlService.getPokemonsQuery),
+    );
+  }
+
+  @computed
+  graphQL.QueryOptions get queryOptions => setQueries();
 }

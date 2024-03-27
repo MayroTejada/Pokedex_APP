@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pokedex_app/core/network/failure.dart';
@@ -18,9 +17,13 @@ class PokemonRepositoryImpl implements PokemonRepository {
       QueryOptions queries) async {
     try {
       var res = await remoteDataSource.getPokemons(queries);
-      if (res.data != null) {}
-      return Right(PokemonListResponseModel.fromJson(res.data!).pokemonSpecies);
-    } on DioException catch (ex) {
+      if (res.data != null) {
+        return Right(
+            PokemonListResponseModel.fromJson(res.data!).pokemonSpecies);
+      } else {
+        return const Left(ServerFailure(code: 200, message: 'empty list'));
+      }
+    } on GraphQLError catch (ex) {
       return Left(ServerFailure(code: 400, message: ex.toString()));
     }
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../core/constants.dart';
 
@@ -7,11 +6,10 @@ final ThemeData pokedexTheme = ThemeData(
   primaryColor: pokeRed,
   appBarTheme: AppBarTheme(
     backgroundColor: pokeRed,
-    systemOverlayStyle: SystemUiOverlayStyle.light,
     toolbarTextStyle: const TextStyle(color: Colors.white),
     actionsIconTheme: const IconThemeData(color: Colors.white),
     titleTextStyle: const TextStyle(
-        color: Colors.white, fontFamily: 'Pokemon', fontSize: 10),
+        color: Colors.white, fontFamily: 'Pokemon', fontSize: 15),
   ), // Gris claro
   bottomAppBarTheme: BottomAppBarTheme(color: pokeRed),
   scaffoldBackgroundColor: const Color(0xFFFFFFFF),

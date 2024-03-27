@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_app/di_container.dart';
-import 'package:pokedex_app/features/home/presentation/views/home_page.dart';
+import 'package:pokedex_app/features/pokemons/presentation/views/pokedex_page.dart';
 import 'package:pokedex_app/themes/poke_theme.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: pokedexTheme,
-      home: const HomePage(),
+      home: const PokedexPage(),
     );
   }
 }
