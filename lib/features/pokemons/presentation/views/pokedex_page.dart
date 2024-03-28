@@ -19,7 +19,7 @@ class _PokedexPageState extends State<PokedexPage> {
       GlobalKey<ScaffoldState>(debugLabel: 'scaffold');
   @override
   void initState() {
-    pokemonProvider = getIt<PokemonStore>()..fetchPokemons("");
+    pokemonProvider = getIt<PokemonStore>()..fetchPokemons();
     super.initState();
   }
 
@@ -40,14 +40,16 @@ class _PokedexPageState extends State<PokedexPage> {
                   ListTile(
                     title: const Text('Region de kanto'),
                     trailing: Checkbox(
-                        value: pokemonProvider.isKantoRegion.value,
-                        onChanged: (_) => pokemonProvider.setFilterRegion(_)),
+                        value: pokemonProvider.isKanto.value,
+                        onChanged: (_) {
+                          pokemonProvider.setFilterRegion(1);
+                        }),
                   ),
                   ListTile(
                     title: const Text('Region de johto'),
                     trailing: Checkbox(
-                        value: pokemonProvider.isKantoRegion.value,
-                        onChanged: (_) => pokemonProvider.setFilterRegion(_)),
+                        value: pokemonProvider.isJotho.value,
+                        onChanged: (_) => {pokemonProvider.setFilterRegion(2)}),
                   )
                 ],
               ),
@@ -74,13 +76,14 @@ class _PokedexPageState extends State<PokedexPage> {
                       PokemonStoreStateEnum.loadedList
                   ? RefreshIndicator(
                       onRefresh: () async =>
-                          await pokemonProvider.fetchPokemons(""),
+                          await pokemonProvider.fetchPokemons(),
                       child: ListView.builder(
                           padding: const EdgeInsets.all(5),
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (_, index) {
-                            var pokemon = pokemonProvider.pokemonList[index];
+                            var pokemon =
+                                pokemonProvider.pokemonList.value[index];
                             return PokeItemCard(
                               pokemon: pokemon,
                               onCallBack: () {
@@ -89,7 +92,7 @@ class _PokedexPageState extends State<PokedexPage> {
                               },
                             );
                           },
-                          itemCount: pokemonProvider.pokemonList.length),
+                          itemCount: pokemonProvider.pokemonList.value.length),
                     )
                   : const Center(
                       child: CircularProgressIndicator(),
