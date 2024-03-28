@@ -23,9 +23,9 @@ La distribución de esta aplicación se realiza a través de Firebase Distributi
 ## Instalación
 
 1. Clona este repositorio en tu máquina local.
-2. Instala las dependencias con `npm install`.
-3. Configura las credenciales de Firebase según las instrucciones proporcionadas en la documentación oficial.
-4. Ejecuta la aplicación con `npm start`.
+2. flutter pub get
+3. flutter pub run build_runner build --delete-conflicting-outputs
+4. Ejecuta la aplicación con `flutter start`.
 
 ¡Disfruta explorando el mundo de Pokémon con esta aplicación!
 
