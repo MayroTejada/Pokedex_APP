@@ -1,8 +1,10 @@
 # Proyecto Pokémon API
 
-![Pokemon](https://img.shields.io/badge/Pok%C3%A9mon-API-red)
-<img src="https://github.com/MayroTejada/pokedex_app/assets/57577583/f098a6ad-3280-4755-9de4-10543c5228b2" alt="![image])" width="300" height="200">
- ![image](https://github.com/MayroTejada/pokedex_app/assets/57577583/f098a6ad-3280-4755-9de4-10543c5228b2)
+![Pokemon](https://img.shields.io/badge/Pok%C3%A9mon-API-red) 
+<br>
+<img src="https://github.com/MayroTejada/pokedex_app/assets/57577583/f098a6ad-3280-4755-9de4-10543c5228b2" alt="![image])" width="200" height="400">
+<img src="https://github.com/MayroTejada/pokedex_app/assets/57577583/41eb31b9-fae5-456b-b6dd-9dc4af3ea713" alt="![image])" width="200" height="400">
+
 
 
 
