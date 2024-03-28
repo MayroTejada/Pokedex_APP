@@ -4,7 +4,6 @@ import 'package:mobx/mobx.dart';
 import 'package:pokedex_app/di_container.dart';
 import 'package:pokedex_app/features/pokemons/data/services/pokemon_graphql.dart';
 import 'package:pokedex_app/features/pokemons/domain/entities/pokemon.dart';
-import 'package:pokedex_app/features/pokemons/domain/entities/pokemon_detail.dart';
 import 'package:pokedex_app/features/pokemons/domain/usecases/get_pokemon.dart';
 import 'package:pokedex_app/features/pokemons/domain/usecases/get_pokemons.dart';
 
@@ -17,7 +16,7 @@ enum PokemonStoreStateEnum { none, loadedList, failed, loading }
 
 abstract class _PokemonStoreBase with Store {
   @observable
-  Observable<PokemonDetail?> currentPokemon = Observable<PokemonDetail?>(null);
+  Observable<Pokemon?> currentPokemon = Observable<Pokemon?>(null);
   @observable
   ObservableList<Pokemon> pokemonList = ObservableList();
   @observable
@@ -53,15 +52,22 @@ abstract class _PokemonStoreBase with Store {
 
     final result = await getIt<GetPokemon>().call(
         GetPokemonParams(queries: graphQL.QueryOptions(document: graphQL.gql("""
-query GetPokemonIQuery {
-  pokemon_response: pokemon_v2_pokemonsprites(where: {pokemon_id: {_eq: $pokemonId}}) {
-    pokemon_id
-    sprites
-    pokemon:pokemon_v2_pokemon {
+query GetPokemonGod{
+  pokemon: pokemon_v2_pokemon(where:{pokemon_species_id:{_eq:$pokemonId}}){
       name
       id
+   sprites:pokemon_v2_pokemonsprites{
+      sprites
+  	}
+     pokemon_specy:pokemon_v2_pokemonspecy{
+      id
+      flavor_texts:pokemon_v2_pokemonspeciesflavortexts{
+          language_id
+          flavor_text
+        
+      }
     }
-  }
+    }
 }
           """))));
     result.fold((l) {}, (pokemon) {

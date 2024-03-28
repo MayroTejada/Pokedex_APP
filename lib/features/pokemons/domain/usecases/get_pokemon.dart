@@ -4,16 +4,17 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pokedex_app/core/network/failure.dart';
 import 'package:pokedex_app/core/usecases/usecase.dart';
+import 'package:pokedex_app/features/pokemons/domain/entities/pokemon.dart';
 import 'package:pokedex_app/features/pokemons/domain/entities/pokemon_detail.dart';
 import 'package:pokedex_app/features/pokemons/domain/repositories/pokemon_repository.dart';
 
 @singleton
-class GetPokemon extends UseCase<PokemonDetail, GetPokemonParams> {
+class GetPokemon extends UseCase<Pokemon, GetPokemonParams> {
   final PokemonRepository repository;
 
   GetPokemon({required this.repository});
   @override
-  Future<Either<Failure, PokemonDetail>> call(GetPokemonParams params) {
+  Future<Either<Failure, Pokemon>> call(GetPokemonParams params) {
     return repository.getPokemon(params.queries);
   }
 }
