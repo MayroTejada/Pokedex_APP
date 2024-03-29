@@ -1,6 +1,12 @@
 # Proyecto Pokémon API
 
-![Pokemon](https://img.shields.io/badge/Pok%C3%A9mon-API-red)
+![Pokemon](https://img.shields.io/badge/Pok%C3%A9mon-API-red) 
+<br>
+<img src="https://github.com/MayroTejada/pokedex_app/assets/57577583/f098a6ad-3280-4755-9de4-10543c5228b2" alt="![image])" width="200" height="400">
+<img src="https://github.com/MayroTejada/pokedex_app/assets/57577583/41eb31b9-fae5-456b-b6dd-9dc4af3ea713" alt="![image])" width="200" height="400">
+
+
+
 
 Este proyecto es una aplicación desarrollada con una arquitectura limpia, que prioriza la modularidad y la separación de preocupaciones para un mantenimiento y escalabilidad óptimos. Utiliza MobX para el manejo del estado, facilitando la gestión de datos reactivos en toda la aplicación.
 
