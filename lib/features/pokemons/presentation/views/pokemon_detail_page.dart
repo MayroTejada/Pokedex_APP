@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,11 +16,9 @@ class PokemonDetailPage extends StatefulWidget {
 
 class _PokemonDetailPageState extends State<PokemonDetailPage> {
   late PokemonStore pokemonStore;
-  late Tween<double> tween;
+
   @override
   void initState() {
-    tween = Tween<double>(begin: 0, end: 1);
-
     pokemonStore = getIt<PokemonStore>()..fetchPokemon(widget.pokemonId);
     super.initState();
   }
@@ -66,22 +65,30 @@ class _PokemonDetailPageState extends State<PokemonDetailPage> {
                           child: Text(pokemon.name ?? ''))),
                 ),
                 SliverFillRemaining(
-                  child: Stack(children: [
-                    Column(
-                      children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(pokemon.pokemonSpecy?.flavorTexts
-                                    .firstWhere(
-                                        (element) => element.languageId == 7)
-                                    .flavorText ??
-                                ''),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: AnimatedTextKit(
+                            isRepeatingAnimation: false,
+                            animatedTexts: [
+                              TypewriterAnimatedText(
+                                  textAlign: TextAlign.start,
+                                  curve: Curves.linearToEaseOut,
+                                  pokemon.pokemonSpecy?.flavorTexts
+                                          .firstWhere((element) =>
+                                              element.languageId == 7)
+                                          .flavorText ??
+                                      '',
+                                  speed: const Duration(milliseconds: 100)),
+                            ],
                           ),
-                        )
-                      ],
-                    ),
-                  ]),
+                        ),
+                      )
+                    ],
+                  ),
                 )
               ],
             );
