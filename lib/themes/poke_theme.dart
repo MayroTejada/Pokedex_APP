@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../core/constants.dart';
 
 final ThemeData pokedexTheme = ThemeData(
   primaryColor: pokeRed,
   appBarTheme: AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: pokeRed, systemNavigationBarColor: pokeRed),
     backgroundColor: pokeRed,
     toolbarTextStyle: const TextStyle(color: Colors.white),
     actionsIconTheme: const IconThemeData(color: Colors.white),
